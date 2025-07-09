@@ -17,6 +17,12 @@
                         <button onclick="generateGetal()" class="btn btn-primary btn-lg">
                             Genereer Getal
                         </button>
+                        <div id="historiek" class="mt-4">
+                            <h5 class="text-muted">Laatste getallen:</h5>
+                            <div id="historiek-lijst" class="text-secondary">
+                                <em>Nog geen getallen gegenereerd</em>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -24,9 +30,31 @@
     </div>
 
     <script>
+        let historiek = [];
+
         function generateGetal() {
             const getal = Math.floor(Math.random() * 11);
             document.getElementById('getal').textContent = getal;
+            
+            // Voeg getal toe aan historiek
+            historiek.unshift(getal);
+            
+            // Houd alleen de laatste 5 getallen
+            if (historiek.length > 5) {
+                historiek.pop();
+            }
+            
+            updateHistoriek();
+        }
+
+        function updateHistoriek() {
+            const historiekelement = document.getElementById('historiek-lijst');
+            
+            if (historiek.length === 0) {
+                historiekelement.innerHTML = '<em>Nog geen getallen gegenereerd</em>';
+            } else {
+                historiekelement.innerHTML = historiek.join(', ');
+            }
         }
     </script>
 </body>
