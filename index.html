@@ -34,7 +34,26 @@
 
         function generateGetal() {
             const getal = Math.floor(Math.random() * 11);
-            document.getElementById('getal').textContent = getal;
+            const getalElement = document.getElementById('getal');
+            
+            // Stel het getal in
+            getalElement.textContent = getal;
+            
+            // Bepaal kleur op basis van getal
+            let kleur;
+            if (getal >= 0 && getal <= 3) {
+                kleur = 'text-danger';    // Rood voor 0-3
+            } else if (getal >= 4 && getal <= 6) {
+                kleur = 'text-warning';   // Geel voor 4-6
+            } else if (getal >= 7 && getal <= 10) {
+                kleur = 'text-success';   // Groen voor 7-10
+            }
+            
+            // Verwijder alle kleur classes
+            getalElement.classList.remove('text-primary', 'text-danger', 'text-warning', 'text-success');
+            
+            // Voeg nieuwe kleur toe
+            getalElement.classList.add(kleur);
             
             // Voeg getal toe aan historiek
             historiek.unshift(getal);
